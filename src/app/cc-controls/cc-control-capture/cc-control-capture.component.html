@@ -1,0 +1,23 @@
+<div class="dob-form-container">
+
+  <p>{{ getMessage() }}</p>
+
+  <form class="dob-form" [formGroup]="formGroup">
+    <mat-form-field class="dob-full-width">
+      <input type="text"
+             placeholder="Fünfsteller der Ohrmarke"
+             matInput
+             #inputLom5="matInput"
+             [formControl]="formControl"
+             [matAutocomplete]="auto"
+             (keydown.enter)="onCattleEntered(inputLom5)">
+      <mat-hint align="end">{{ tmpTotal + '/' + cattles.length }}</mat-hint>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCattlePicked(inputLom5)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.lom">
+          {{ option.lom.substring(0, (option.lom.length - 5)) }}<strong>{{option.lom5}}</strong>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+</div>

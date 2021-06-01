@@ -1,0 +1,29 @@
+<mat-nav-list>
+
+  <p>{{ getMessage() }}</p>
+
+  <div class="dob-bottom-container">
+
+    <button mat-stroked-button class="dob-bottom-btn-ok"
+            #okButton
+            (click)="onSavedCheck()"
+            (keydown.enter)="onSavedCheck()">OK</button>
+
+    <div class="dob-bottom-btn-opts">
+      <div class="dob-bottom-col-left">
+        <button mat-stroked-button class="dob-bottom-option" (click)="toggleEarmarkCheck()">Anzahl Ohrmarken:</button>
+        <button mat-stroked-button class="dob-bottom-option" (click)="toggleAgeCheck()">Alter ({{ "1.5 J" }}):</button>
+        <button mat-stroked-button class="dob-bottom-option" (click)="toggleGenderCheck()">Geschlecht:</button>
+        <button mat-stroked-button class="dob-bottom-option" (click)="toggleBreedCheck()">Rasse:</button>
+      </div>
+      <div class="dob-bottom-col-right">
+        <div class="dob-bottom-value">{{ getEarmarkText() }}</div>
+        <div class="dob-bottom-value">{{ getAgeText() }}</div>
+        <div class="dob-bottom-value">{{ getGenderText() }}</div>
+        <div class="dob-bottom-value">{{ getBreedText() }}</div>
+      </div>
+    </div>
+
+  </div>
+
+</mat-nav-list>

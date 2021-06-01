@@ -1,0 +1,48 @@
+.dob-flex-container {
+  display: grid;
+  margin-top: 2rem;
+  grid-auto-rows: 7rem;
+  row-gap: 1.5rem;
+}
+
+.dob-tile-card {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background: #85cd5f;
+  justify-content: center;
+}
+
+.dob-tile-content {
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+}
+
+.dob-tile-card:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 475px){
+  .dob-flex-container {
+    grid-auto-rows: 9rem;
+    grid-template-columns: auto auto;
+    column-gap: 2rem;
+  }
+}
+
+@media only screen and (min-width: 825px){
+  .dob-flex-container {
+    grid-auto-rows: 10rem;
+    grid-template-columns: auto auto auto;
+    column-gap: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1280px){
+  .dob-flex-container {
+    grid-auto-rows: 11rem;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 2rem;
+  }
+}

@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  margin-top: 2rem;
+}
+
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+.mat-raised-button {
+  background: #85cd5f;
+  color: white;
+}
+
+.mat-stroked-button {
+  margin: 1rem 0;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+div mat-error {
+  margin-bottom: 1rem;
+}
+
+.dob-add-bnr-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.dob-add-bnr-container button {
+  margin-left: 1rem;
+  background: #76b856;
+}

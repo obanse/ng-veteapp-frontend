@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveCow()" *ngIf="!isLoading">
+    <mat-form-field>
+      <label for="title"></label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        id="title"
+        placeholder="Cow Title">
+      <mat-error *ngIf="form.get('title').invalid">Please enter valid title</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <label for="content"></label>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="content"
+        id="content"
+        placeholder="Cow Content">
+      </textarea>
+      <mat-error *ngIf="form.get('content').invalid">Please enter valid content</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="uploadFile.click()">Upload CSV</button>
+      <input type="file" #uploadFile (change)="onFilePicked($event)">
+      <mat-error *ngIf="csvFile !== '' && csvFile && !form.get('csvFile').valid">Please choose valid file type</mat-error>
+      <mat-error *ngIf="csvFile !== '' && csvFile && form.get('csvFile').valid" style="color: #76b856">OK</mat-error>
+    </div>
+    <button
+      mat-raised-button
+      type="submit">Rind speichern</button>
+  </form>
+</mat-card>

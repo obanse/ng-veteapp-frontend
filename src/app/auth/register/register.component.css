@@ -1,0 +1,22 @@
+mat-card {
+  width: 90%;
+  max-width: 500px;
+  margin: 2rem auto 0 auto;
+}
+
+.mat-raised-button {
+  margin-top: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

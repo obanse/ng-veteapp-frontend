@@ -1,0 +1,36 @@
+<div class="dob-container" [class.dob-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="dob-toolbar" [class.dob-is-mobile]="mobileQuery.matches">
+    <button mat-icon-button (click)="sidenav.toggle()" *ngIf="userIsAuthenticated">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>
+      <a class="dob-app-name" routerLink="/">CC-Kontrollen</a>
+    </span>
+    <span class="dob-spacer"></span>
+    <button mat-icon-button class="icon" *ngIf="!userIsAuthenticated" routerLink="/auth/login">
+      <mat-icon>login</mat-icon>
+    </button>
+    <button mat-icon-button class="icon" *ngIf="userIsAuthenticated" routerLink="/auth/register">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button class="icon" *ngIf="userIsAuthenticated" (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="dob-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #sidenav [mode]="'over'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list *ngIf="userIsAuthenticated">
+        <a mat-list-item routerLink="/companies">Betriebe</a>
+        <a mat-list-item routerLink="/">Rinder</a>
+        <a mat-list-item (click)="sidenav.close()" style="color: red"><mat-icon>close</mat-icon>&nbsp;Schließen</a>
+        <a mat-list-item (click)="onLogout()"><mat-icon>logout</mat-icon>&nbsp;Logout</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

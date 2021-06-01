@@ -1,0 +1,25 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion [multi]="true" *ngIf="cows.length > 0 && !isLoading">
+  <mat-expansion-panel  *ngFor="let cow of cows">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Titel:&nbsp;</strong>{{ cow.title }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p><strong>Inhalt:&nbsp;</strong>{{ cow.content }}</p>
+    <div class="cow-csv">
+      <span><strong>Datei:&nbsp;</strong><a [href]="cow.csvPath">{{ cow.csvPath }}</a></span>
+    </div>
+    <mat-action-row *ngIf="userIsAuthenticated && userId === cow.creator">
+      <a mat-button color="primary" [routerLink]="['/edit', cow.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(cow.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalCows"
+               [pageSize]="cowsPerPage"
+               [pageSizeOptions]="pageSizeOpts"
+               (page)="onChangedPage($event)"
+               *ngIf="cows.length > 0">
+</mat-paginator>
+<p class="info-text mat-body-1" *ngIf="cows.length <= 0 && !isLoading">Bisher wurden keine Rinder hinzugefügt!</p>

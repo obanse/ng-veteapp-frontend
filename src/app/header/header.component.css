@@ -1,0 +1,48 @@
+/* Angular Theming */
+.dob-toolbar.mat-primary {
+  color: white;
+  background: #76b856;
+}
+
+/* Styling */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+mat-sidenav-container {
+  background: white;
+}
+
+mat-sidenav-content {
+  width: 80%;
+  margin: auto;
+}
+
+.dob-spacer {
+  flex: 1 1 auto;
+}
+
+/* side navigation */
+.dob-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.dob-is-mobile .dob-toolbar {
+    position: fixed;
+    z-index: 2;
+}
+
+.dob-sidenav-container {
+  flex: 1;
+}
+
+.dob-is-mobile .dob-sidenav-container {
+  flex: 1 0 auto;
+}

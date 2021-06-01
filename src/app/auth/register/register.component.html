@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+<!--  <formImport (submit)="onRegister(registerForm)" #registerForm="ngForm" *ngIf="!isLoading">-->
+  <form [formGroup]="form" (submit)="onSaveUser()" *ngIf="!isLoading">
+
+    <mat-form-field>
+      <label for="email"></label>
+      <input matInput
+             type="email"
+             formControlName="email"
+             id="email"
+             placeholder="E-Mail">
+      <mat-error *ngIf="form.get('email').invalid">Bitte geben Sie eine E-Mail-Adresse ein.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="getMode() === 'register'">
+      <label for="password"></label>
+      <input matInput
+             type="password"
+             formControlName="password"
+             id="password"
+             placeholder="Passwort">
+      <mat-error *ngIf="form.get('password').invalid">Passwort entspricht den Sicherheitsanforderungen.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="hitbnr"></label>
+      <input matInput
+             type="text"
+             formControlName="hitbnr"
+             id="hitbnr"
+             placeholder="HIT Betriebsnummer">
+      <mat-error *ngIf="form.get('hitbnr').invalid">Bitte geben Sie Ihren zugehörige HIT Betriebsnummer ein.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="hitmbn"></label>
+      <input matInput
+             type="text"
+             formControlName="hitmbn"
+             id="hitmbn"
+             placeholder="HIT Mitbenutzerkennung">
+      <mat-error *ngIf="form.get('hitmbn').invalid">Bitte geben Sie Ihren HIT Mitbenutzer ein.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="hitpass"></label>
+      <input matInput
+             type="password"
+             formControlName="hitpass"
+             id="hitpass"
+             placeholder="HIT Passwort">
+      <mat-error *ngIf="form.get('hitpass').invalid">Bitte geben Sie Ihr HIT Passwort ein.</mat-error>
+    </mat-form-field>
+
+    <div class="login-buttons" *ngIf="!isLoading">
+      <button mat-raised-button color="accent" type="submit"
+              *ngIf="getMode() === 'register'">Registrieren</button>
+      <button mat-raised-button color="accent" type="submit"
+              *ngIf="getMode() === 'update'">Aktualisieren</button>
+    </div>
+  </form>
+</mat-card>

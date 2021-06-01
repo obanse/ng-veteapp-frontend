@@ -1,0 +1,9 @@
+<div class="dob-flex-container">
+  <div class="dob-tile-card"
+    *ngFor="let tile of tiles"
+    [routerLink]="tile.path">
+    <div class="dob-tile-content">
+      <span>{{tile.title}}</span>
+    </div>
+  </div>
+</div>

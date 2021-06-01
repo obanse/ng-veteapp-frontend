@@ -1,0 +1,93 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div *ngIf="!isLoading">
+  <div class="dob-form-container" *ngIf="userIsAuthenticated && userIsHitUser">
+    <form [formGroup]="formImport" *ngIf="!isLoading" class="dob-form">
+      <mat-form-field>
+        <mat-label>Betriebsnummer importieren</mat-label>
+        <label>
+          <input
+            matInput
+            type="text"
+            formControlName="bnr"
+            maxlength="18"
+            placeholder="150001112222"
+            #bnr required>
+        </label>
+        <mat-error *ngIf="formImport.get('bnr').invalid"></mat-error>
+      </mat-form-field>
+      <button mat-raised-button class="dob-form-button-bnr" type="button" (click)="onImportCompany()">
+        <mat-icon>add_business</mat-icon>
+      </button>
+    </form>
+  </div>
+
+  <div class="dob-filter-container">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter..." #input>
+      </label>
+      <mat-icon matSuffix>filter_list</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+      <!-- BNR Column -->
+      <ng-container matColumnDef="bnr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> BNR </th>
+        <td mat-cell *matCellDef="let elem"> {{ elem.bnr }} </td>
+      </ng-container>
+
+      <!-- NAME Column -->
+      <ng-container matColumnDef="firma">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+        <td mat-cell *matCellDef="let elem"> {{ elem.firma }} </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let elem" [attr.colspan]="columnsToDisplay.length">
+          <div class="element-detail"
+               [@detailExpand]="elem == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="element-diagram">
+              <div class="element-bnr"> {{elem.bnr}} </div>
+              <div class="element-name"> {{elem.firma}} </div>
+              <div class="element-street"> {{elem.str}} </div>
+              <div class="element-city"> {{elem.plz + ' ' + elem.ort}} </div>
+            </div>
+            <div class="element-options">
+              <button mat-raised-button type="button" color="primary" (click)="companyService.setFilter(elem._id)"
+                      routerLink="/cc-controls">
+                <mat-icon>assignment</mat-icon>
+              </button>
+              <button mat-raised-button type="button" color="accent" (click)="onDelete(elem.bnr)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let elem; columns: displayedColumns;"
+          class="element-row"
+          [class.expanded-row]="expandedElement === elem"
+          (click)="expandedElement = expandedElement === elem ? null : elem"
+      ></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-elem" *matNoDataRow>
+        <td class="mat-cell info-text dob-td-padding" colspan="2">Keine Betriebe gefunden!</td>
+      </tr>
+    </table>
+    <mat-paginator [length]="totalCompanies"
+                   [pageSize]="companiesPerPage"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onChangedPage($event)">
+    </mat-paginator>
+  </div>
+</div>

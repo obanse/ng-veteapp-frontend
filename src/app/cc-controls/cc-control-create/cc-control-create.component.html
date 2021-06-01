@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSave()" *ngIf="!isLoading">
+    <mat-form-field appearance="fill">
+      <mat-label>Datum von</mat-label>
+      <label>
+        <input matInput [matDatepicker]="dateFrom" formControlName="dateFrom" required>
+      </label>
+      <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+      <mat-datepicker #dateFrom></mat-datepicker>
+
+      <mat-error *ngIf="form.get('dateFrom').invalid"></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Datum bis</mat-label>
+      <label>
+        <input matInput [matDatepicker]="dateTo" formControlName="dateTo">
+      </label>
+      <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+      <mat-datepicker #dateTo></mat-datepicker>
+
+      <mat-error *ngIf="form.get('dateTo').invalid"></mat-error>
+    </mat-form-field>
+    <div class="dob-add-bnr-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Betriebsnummer</mat-label>
+        <label>
+          <input type="text"
+                 pattern="^[0-9]{12,15}$"
+                 matInput
+                 maxlength="15"
+                 required formControlName="bnr">
+        </label>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('bnr').invalid"></mat-error>
+    </div>
+    <button
+      mat-raised-button
+      type="submit">CC-Kontrolle speichern</button>
+  </form>
+</mat-card>

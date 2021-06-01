@@ -1,0 +1,87 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="!isLoading">
+  <div class="dob-filter-container">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter..." #input>
+      </label>
+      <mat-icon matSuffix>filter_list</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+      <!-- FIRMA Column -->
+      <ng-container matColumnDef="firma">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> FIRMA </th>
+        <td mat-cell *matCellDef="let elem"> {{ elem.firma }} </td>
+      </ng-container>
+
+      <!-- DATUM Column -->
+      <ng-container matColumnDef="dateFrom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DATUM </th>
+        <td mat-cell *matCellDef="let elem"> {{ elem.dateFrom | date: 'dd.MM.yyyy' }} </td>
+      </ng-container>
+
+      <!-- Options Column -->
+      <ng-container matColumnDef="options" *ngIf="userIsAuthenticated">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let elem" class="dob-table-td-last">
+          <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="userIsHitUser">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onFetchBestreg(elem.id, elem.dateFrom, elem.dateTo, elem.bnrId)" [disabled]="elem.hasInventory">
+              <mat-icon>cloud_download</mat-icon>
+              <span>Bestandsregister laden</span>
+            </button>
+            <button mat-menu-item [disabled]="!elem.hasInventory" *ngIf="!elem.isStarted && !elem.isFinished"
+                    (click)="onStartControl(elem.id)">
+              <mat-icon>play_arrow</mat-icon>
+              <span>Erfassung starten</span>
+            </button>
+            <div *ngIf="elem.isStarted && !elem.isFinished">
+              <button mat-menu-item [disabled]="!elem.hasInventory" [routerLink]="'/cc-controls/capture/' + elem.id">
+                <mat-icon>fast_forward</mat-icon>
+                <span>Erfassung fortsetzen</span>
+              </button>
+              <button mat-menu-item [disabled]="!elem.hasInventory" (click)="onFinishControl(elem.id)">
+                <mat-icon>stop</mat-icon>
+                <span>Erfassung abschließen</span>
+              </button>
+            </div>
+            <button mat-menu-item [disabled]="!elem.hasInventory" *ngIf="elem.isStarted && elem.isFinished" (click)="onTest()">
+              <mat-icon>done</mat-icon>
+              <span>Auswertung anzeigen</span>
+            </button>
+            <button mat-menu-item (click)="onDelete(elem.id)">
+              <mat-icon>delete</mat-icon>
+              <span>Löschen</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let elem; columns: displayedColumns;" class="element-row"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-elem" *matNoDataRow>
+        <td class="mat-cell info-text dob-td-padding" colspan="4">Keine CC-Kontrollen gefunden!</td>
+      </tr>
+    </table>
+    <mat-paginator [length]="totalCcControls"
+                   [pageSize]="ccControlsPerPage"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onChangedPage($event)">
+    </mat-paginator>
+  </div>
+
+  <div class="dob-bottom-button-container">
+    <button mat-fab class="dob-add-button" [routerLink]="['/create']">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

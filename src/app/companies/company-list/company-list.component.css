@@ -1,0 +1,124 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+button {
+  background: #76b856;
+  color: white;
+}
+
+.info-text {
+  text-align: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 0.5rem 1rem 0.5rem 0;
+}
+
+.element-name {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+.element-options {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 0;
+}
+
+.element-options button {
+  margin-left: 1rem;
+}
+
+.dob-filter-container {
+  padding: 0 1rem;
+}
+
+.dob-td-padding {
+  padding: 1rem 0;
+}
+
+.dob-form-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.dob-form {
+  display: contents;
+}
+
+.dob-form-field .dob-form-button {
+  width: 100%;
+  min-width: 300px;
+}
+
+.dob-form-field {
+  padding-left: 1rem;
+}
+
+.dob-form-button {
+  padding: .5em 0;
+}
+
+.mat-raised-button {
+  line-height: 28px;
+  z-index: 1;
+}
+
+.dob-form-button-bnr {
+  height: 2.5rem;
+}
