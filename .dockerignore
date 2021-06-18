@@ -1,1 +1,5 @@
 node_modules
+.git
+Dockerfile.production
+Dockerfile.development
+docs
